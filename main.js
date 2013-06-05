@@ -1,7 +1,7 @@
 var app = { 
 
 findByName:
-  function() {
+	function() {
 		console.log('findByName');
 
 		this.store.findByName($('.search-key').val(), 
@@ -20,8 +20,10 @@ var l = employees.length;
 		});
 	},
 	initialize: function() {
-		this.store = new MemoryStore();
-		$('.search-key').on('keyup', $.proxy(this.findByName, this));
+		var self = this;
+		this.store = new MemoryStore(function() {
+			self.renderHomeView();
+		});
 	}
 
 ,
@@ -56,3 +58,5 @@ initialize: function() {
 	});
 	$('.search-key').on('keyup', $.proxy(this.findByName, this));
 }
+
+
